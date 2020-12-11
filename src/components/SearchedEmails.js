@@ -13,10 +13,10 @@ const SearchedEmails = ({searchFilterInput, allEmailsFromAPI, searchFunction}) =
 
     return (
         <div>
-            <label>
+            <h5>
                 SEARCH
                 <input type={'text'} placeholder={`Search Emails Here`} onChange={e => searchFunction(e)}/>
-            </label>
+            </h5>
             <div>
                 {emails}
             </div>
