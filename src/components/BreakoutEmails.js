@@ -1,5 +1,5 @@
 import React from "react";
-import {useRouteMatch, useParams, Route, Switch, Link} from "react-router-dom";
+import {useRouteMatch, Route, Link} from "react-router-dom";
 import IndividualEmail from "./IndividualEmail";
 
 const BreakoutEmails = ({allEmailsFromAPI, typeOfDisplay}) => {

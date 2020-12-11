@@ -1,6 +1,6 @@
 import './App.css';
 import {Component} from "react";
-import {BrowserRouter, Link, Route, Switch, useRouteMatch} from "react-router-dom";
+import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
 import BreakoutEmails from "./components/BreakoutEmails";
 import SearchedEmails from "./components/SearchedEmails";
 import SendEmail from "./components/SendEmail";
@@ -43,7 +43,7 @@ class App extends Component {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             }
-        }).then(response => this.componentDidMount())
+        }).then(() => this.componentDidMount())
     }
 
     handleSearchBarChanges = (event) => {
