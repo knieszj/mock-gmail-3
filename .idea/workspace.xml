@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ae204bc2-f6ab-4e19-b097-3cfac0e91cd1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/SendEmail.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/IndividualEmail.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.eslintcache" beforeDir="false" afterPath="$PROJECT_DIR$/.eslintcache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SearchedEmails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchedEmails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/BreakoutEmails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/BreakoutEmails.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SendEmail.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SendEmail.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607647134895</updated>
-      <workItem from="1607647136114" duration="8287000" />
+      <workItem from="1607647136114" duration="11213000" />
     </task>
     <servers />
   </component>

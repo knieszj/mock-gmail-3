@@ -1,6 +1,10 @@
 import React from "react";
+import {useRouteMatch, useParams, Route, Switch, Link} from "react-router-dom";
+import IndividualEmail from "./IndividualEmail";
 
-const BreakoutEmails = ({allEmailsFromAPI, typeOfDisplay, searchFilterInput}) => {
+const BreakoutEmails = ({allEmailsFromAPI, typeOfDisplay}) => {
+    const match = useRouteMatch();
+
 
     const emails = allEmailsFromAPI === null ?
         (
@@ -11,35 +15,29 @@ const BreakoutEmails = ({allEmailsFromAPI, typeOfDisplay, searchFilterInput}) =>
             <>
                 {allEmailsFromAPI.map(email => {
                     return (
-                        <div>
-                            <h5>{email.subject}</h5>
-                            <h5>{email.sender}</h5>
-                        </div>
+                        <Link to={`${match.url}/${email.id}`}>
+                            <div>
+                                <h5>{email.subject}</h5>
+                                <h5>{email.sender}</h5>
+                            </div>
+                        </Link>
                     )
                 })}
             </>
-        ) : typeOfDisplay === 'entireEmail' ? (
-            <>
-                {allEmailsFromAPI.map(email => {
-                    return (
-                        <div>
-                            <h4>{email.sender}</h4>
-                            <h4>{email.recipient}</h4>
-                            <h4>{email.subject}</h4>
-                            <h4>{email.message}</h4>
-                            <h4>{email.date}</h4>
-                            <h4>{email.id}</h4>
-                        </div>
-                    )
-                })}
-            </>
-        ) : (<div>Reached End Of Multi Ternary Statements</div>)
+        )  : (<div>Reached End Of Multi Ternary Statements</div>)
 
 
     return (
-        <>
-            {emails}
-        </>
+        <div>
+            <div>{emails}</div>
+            <div>
+                <Route path={`${match.url}/:emailId`}>
+                    {console.log("allEmailsFromAPI: ", allEmailsFromAPI)}
+                    <IndividualEmail allEmailsFromAPI={allEmailsFromAPI}/>
+                </Route>
+            </div>
+
+        </div>
     )
 }
 

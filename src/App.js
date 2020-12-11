@@ -1,6 +1,6 @@
 import './App.css';
 import {Component} from "react";
-import {BrowserRouter, Link, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Link, Route, Switch, useRouteMatch} from "react-router-dom";
 import BreakoutEmails from "./components/BreakoutEmails";
 import SearchedEmails from "./components/SearchedEmails";
 import SendEmail from "./components/SendEmail";
@@ -26,6 +26,7 @@ class App extends Component {
         this.sendEmailMessage = this.sendEmailMessage.bind(this)
         this.buildEmailMessageToSend = this.buildEmailMessageToSend.bind(this)
         this.sendEmailToAPI = this.sendEmailToAPI.bind(this)
+        this.resetStateForInputs = this.resetStateForInputs.bind(this)
     }
 
     async componentDidMount() {
@@ -34,8 +35,8 @@ class App extends Component {
         this.setState({emailApiResults: responseJSON})
     }
 
-    async sendEmailToAPI(){
-        await fetch('http://localhost:3001/send',{
+    async sendEmailToAPI() {
+        await fetch('http://localhost:3001/send', {
             method: 'POST',
             body: JSON.stringify(this.buildEmailMessageToSend()),
             headers: {
@@ -50,35 +51,50 @@ class App extends Component {
         this.setState({searchBarInput: value})
     }
 
-    sendEmailSubject(event){
+    sendEmailSubject(event) {
         const value = event.target.value;
-        this.setState({createEmailSubject : value})
+        this.setState({createEmailSubject: value})
     }
 
-    sendEmailSender(event){
+    sendEmailSender(event) {
         const value = event.target.value;
-        this.setState({createEmailSender : value})
-    }
-    sendEmailRecipient(event){
-        const value = event.target.value;
-        this.setState({createEmailRecipient : value})
-    }
-    sendEmailMessage(event){
-        const value = event.target.value;
-        this.setState({createEmailMessage : value})
+        this.setState({createEmailSender: value})
     }
 
-    buildEmailMessageToSend(){
-        const obj = {
+    sendEmailRecipient(event) {
+        const value = event.target.value;
+        this.setState({createEmailRecipient: value})
+    }
+
+    sendEmailMessage(event) {
+        const value = event.target.value;
+        this.setState({createEmailMessage: value})
+    }
+
+    resetStateForInputs() {
+        const value = null;
+        const value_1 = '';
+        this.setState({
+            createEmailSubject: value,
+            createEmailSender: value,
+            createEmailRecipient: value,
+            createEmailMessage: value,
+            searchBarInput: value_1,
+        })
+    }
+
+    buildEmailMessageToSend() {
+        return {
             subject: this.state.createEmailSubject,
             sender: this.state.createEmailSender,
             recipient: this.state.createEmailRecipient,
             message: this.state.createEmailMessage,
         }
-        return obj
     }
 
     render() {
+
+
         const {emailApiResults} = this.state;
         const {searchBarInput} = this.state;
         const {handleSearchBarChanges} = this;
@@ -87,31 +103,34 @@ class App extends Component {
         const {sendEmailRecipient} = this;
         const {sendEmailMessage} = this;
         const {sendEmailToAPI} = this;
+        const {resetStateForInputs} = this;
 
         const brokenOutEmails = <BreakoutEmails allEmailsFromAPI={emailApiResults}
                                                 typeOfDisplay={'bySubjectAndSender'}/>
-        const entireEmail = <BreakoutEmails allEmailsFromAPI={emailApiResults} typeOfDisplay={'entireEmail'}/>
         const searchedEmail = <SearchedEmails allEmailsFromAPI={emailApiResults} searchFilterInput={searchBarInput}
                                               searchFunction={handleSearchBarChanges}/>
-        const sendEmail = <SendEmail subject={sendEmailSubject} sender={sendEmailSender} recipient={sendEmailRecipient} message={sendEmailMessage} sendEmailToAPI={sendEmailToAPI}/>
+        const sendEmail = <SendEmail subject={sendEmailSubject} sender={sendEmailSender} recipient={sendEmailRecipient}
+                                     message={sendEmailMessage} sendEmailToAPI={sendEmailToAPI}/>
 
 
         return (
             <BrowserRouter>
                 <div>
                     <Link to={'/SendEmail'}>
-                        <button>COMPOSE</button>
+                        <button onClick={resetStateForInputs}>COMPOSE</button>
                     </Link>
                     <Link to={'/Inbox'}>
-                        <button>INBOX</button>
+                        <button onClick={resetStateForInputs}>INBOX</button>
                     </Link>
 
                 </div>
                 <Switch>
                     <Route path={'/Inbox'}>
                         {searchedEmail}
-                        {brokenOutEmails}
-                        {entireEmail}
+                        <div>
+                            <div>{brokenOutEmails}</div>
+                        </div>
+
                     </Route>
                 </Switch>
                 <Switch>
@@ -122,7 +141,6 @@ class App extends Component {
 
             </BrowserRouter>
         );
-
     }
 }
 
